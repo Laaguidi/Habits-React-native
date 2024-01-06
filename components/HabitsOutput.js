@@ -2,7 +2,7 @@
 import { StyleSheet, View, Text } from 'react-native';
 import HabitsList  from './HabitsList';
 import DailyHabits from "./DailyHabits";
-/*
+
 const dummy_habits = [
     {
         id: 'e1',
@@ -37,7 +37,7 @@ const dummy_habits = [
         description: 'Test 8',
     }
 ];
-*/
+
 function HabitsOutput({ habits, fallbackText, onPress }){
     let message = <Text style={styles.noHabitsMessage}>{fallbackText}</Text>;
 

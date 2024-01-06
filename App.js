@@ -7,8 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import PresentationScreen from "./screens/PresentationScreen";
 //import AllHabits from "./screens/AllHabits";
 //import IconButton from "./components/IconButton";
-
-//import ManageHabit from "./screens/ManageHabit";
+import ManageHabit from "./screens/ManageHabit";
 //import HabitsContextProvider, {HabitsContext} from "./store/habits-context";
 
 
@@ -27,6 +26,35 @@ export default function App() {
                 component={PresentationScreen}
                 //options={{ headerShown: false }}
             />
+
+              <Stack.Screen
+                  name="AllHabits"
+                  component={AllHabits}
+                  options={({ navigation }) => ({
+                      // Place your screen options here
+                      // For example:
+                      headerTitle: 'All Habits',
+                      // ... other options
+                      headerRight: ({ tintColor }) => (
+                          <IconButton
+                              icon="add"
+                              size={24}
+                              color={tintColor}
+                              onPress={() => {
+                                  navigation.navigate('ManageHabit');
+                              }}
+                          />
+                      ),
+                  })}
+              />
+
+              <Stack.Screen
+                  name="ManageHabit"
+                  component={ManageHabit}
+                  options={{
+                      presentation: 'modal',
+                  }}
+              />
 
           </Stack.Navigator>
         </NavigationContainer>
