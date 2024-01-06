@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import {useEffect, useContext} from 'react';
+//import {useEffect, useContext} from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+//import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PresentationScreen from "./screens/PresentationScreen";
-//import AllHabits from "./screens/AllHabits";
-//import IconButton from "./components/IconButton";
+import AllHabits from "./screens/AllHabits";
+
 import ManageHabit from "./screens/ManageHabit";
-//import HabitsContextProvider, {HabitsContext} from "./store/habits-context";
+
 
 
 
@@ -18,7 +18,6 @@ const Stack = createStackNavigator();
 export default function App() {
 
   return (
-
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
@@ -35,8 +34,8 @@ export default function App() {
                       // For example:
                       headerTitle: 'All Habits',
                       // ... other options
-                      headerRight: ({ tintColor }) => (
-                          <IconButton
+                      /*headerRight: ({ tintColor }) => (
+                         <IconButton
                               icon="add"
                               size={24}
                               color={tintColor}
@@ -44,7 +43,7 @@ export default function App() {
                                   navigation.navigate('ManageHabit');
                               }}
                           />
-                      ),
+                      ),*/
                   })}
               />
 
@@ -58,7 +57,6 @@ export default function App() {
 
           </Stack.Navigator>
         </NavigationContainer>
-
   );
 }
 

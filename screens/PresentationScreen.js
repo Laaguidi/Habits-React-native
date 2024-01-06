@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Button, ScrollView } from 'react-native';
-import CustomButton from "../components/CustomButton";
+//import CustomButton from "../components/CustomButton";
 //import { CustomButton } from '../components/CustomButton';
 
 
@@ -31,7 +31,7 @@ function PresentationScreen() {
                     totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam
                     quasi aliquam eligendi, placeat qui corporis!
                 </Text>
-                <CustomButton  > GO </CustomButton>
+                {/*<CustomButton  > GO </CustomButton>*/}
             </ScrollView>
 
         </View>
