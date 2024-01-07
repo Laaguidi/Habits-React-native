@@ -3,11 +3,13 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import {GlobalStyles} from "../constants/style";
 import {useNavigation} from "@react-navigation/native";
 
-function HabitItem({ text }) {
+function HabitItem({ id, text }) {
     const navigation = useNavigation();
 
     function habitPressHandler() {
-        navigation.navigate('ManageHabit');
+        navigation.navigate('ManageHabit', {
+            habitId: id
+        });
     }
 
     return (

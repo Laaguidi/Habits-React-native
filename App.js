@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import PresentationScreen from "./screens/PresentationScreen";
 import AllHabits from "./screens/AllHabits";
 import IconButton from "./components/IconButton";
+import { GlobalStyles } from './constants/style';
 
 
 import ManageHabit from "./screens/ManageHabit";
@@ -17,7 +18,13 @@ export default function App() {
 
   return (
         <NavigationContainer>
-          <Stack.Navigator>
+            <StatusBar backgroundColor="#fff" barStyle="light-content" />
+          <Stack.Navigator
+            /*  screenOptions={{
+                  headerStyle: { backgroundColor: GlobalStyles.colors.pagesBack },
+                  headerTintColor: 'white',
+              }}*/
+          >
           {/*  <Stack.Screen
                 name="Presentation"
                 component={PresentationScreen}
