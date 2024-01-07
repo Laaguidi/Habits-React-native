@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 //import {useEffect, useContext} from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-//import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PresentationScreen from "./screens/PresentationScreen";
 import AllHabits from "./screens/AllHabits";
+import IconButton from "./components/IconButton";
+
 
 import ManageHabit from "./screens/ManageHabit";
 
@@ -34,7 +36,7 @@ export default function App() {
                       // For example:
                       headerTitle: 'All Habits',
                       // ... other options
-                      /*headerRight: ({ tintColor }) => (
+                      headerRight: ({ tintColor }) => (
                          <IconButton
                               icon="add"
                               size={24}
@@ -43,17 +45,17 @@ export default function App() {
                                   navigation.navigate('ManageHabit');
                               }}
                           />
-                      ),*/
+                      ),
                   })}
               />
 
-            {/*  <Stack.Screen
+              <Stack.Screen
                   name="ManageHabit"
                   component={ManageHabit}
                   options={{
                       presentation: 'modal',
                   }}
-              />*/}
+              />
 
           </Stack.Navigator>
         </NavigationContainer>
@@ -63,7 +65,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#7f8c8d',
+    //backgroundColor: '#7f8c8d',
     alignItems: 'center',
     justifyContent: 'center',
     width: '80%'

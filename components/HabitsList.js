@@ -1,7 +1,8 @@
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
+import HabitItem from "./HabitItem";
 
 function renderHabitItem(itemData) {
-    return <Text>{itemData.item.text}</Text>;
+    return <HabitItem { ...itemData.item } />;
 }
 
 function HabitsList({habits}) {
