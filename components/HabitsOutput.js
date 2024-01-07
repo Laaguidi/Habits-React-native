@@ -28,7 +28,7 @@ function HabitsOutput({ habits }) {
     return (
         <View>
          <Text>List Of habits</Text>
-            <HabitsList/>
+            <HabitsList habits={dummy_habits}/>
         </View>
     );
 }

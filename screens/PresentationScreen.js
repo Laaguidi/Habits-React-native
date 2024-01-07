@@ -31,6 +31,13 @@ function PresentationScreen() {
                     totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam
                     quasi aliquam eligendi, placeat qui corporis!
                 </Text>
+                <Text>temporibus enim commodi iusto libero magni deleniti quod quam
+                    consequuntur! Commodi minima excepturi repudiandae velit hic maxime
+                    doloremque. Quaerat provident commodi consectetur veniam similique ad
+                    earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo
+                    fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore
+                    suscipit quas? Nulla, placeat.
+                </Text>
                 {/*<CustomButton  > GO </CustomButton>*/}
             </ScrollView>
 

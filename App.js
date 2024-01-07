@@ -20,11 +20,11 @@ export default function App() {
   return (
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen
+          {/*  <Stack.Screen
                 name="Presentation"
                 component={PresentationScreen}
                 //options={{ headerShown: false }}
-            />
+            />*/}
 
               <Stack.Screen
                   name="AllHabits"
@@ -47,13 +47,13 @@ export default function App() {
                   })}
               />
 
-              <Stack.Screen
+            {/*  <Stack.Screen
                   name="ManageHabit"
                   component={ManageHabit}
                   options={{
                       presentation: 'modal',
                   }}
-              />
+              />*/}
 
           </Stack.Navigator>
         </NavigationContainer>
