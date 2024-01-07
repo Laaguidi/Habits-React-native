@@ -1,10 +1,20 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import {GlobalStyles} from "../constants/style";
+import {useNavigation} from "@react-navigation/native";
 
 function HabitItem({ text }) {
+    const navigation = useNavigation();
+
+    function habitPressHandler() {
+        navigation.navigate('ManageHabit');
+    }
+
     return (
-        <Pressable>
+        <Pressable
+            onPress={habitPressHandler}
+            style={({ pressed }) => pressed && styles.pressed}
+        >
             <View style={styles.habitItem}>
               <Text style={styles.text}>{text}</Text>
             </View>

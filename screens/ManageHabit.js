@@ -1,6 +1,8 @@
 import {StyleSheet, Text, View} from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 function ManageHabit({route, navigation}){
+
 
     return (
         <Text>Manage habits</Text>

@@ -11,10 +11,6 @@ import IconButton from "./components/IconButton";
 
 import ManageHabit from "./screens/ManageHabit";
 
-
-
-
-
 const Stack = createStackNavigator();
 
 export default function App() {
