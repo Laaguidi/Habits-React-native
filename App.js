@@ -11,12 +11,14 @@ import { GlobalStyles } from './constants/style';
 
 
 import ManageHabit from "./screens/ManageHabit";
+import HabitsContextProvider from "./store/habits-context";
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
   return (
+      <HabitsContextProvider>
         <NavigationContainer>
             <StatusBar backgroundColor="#fff" barStyle="light-content" />
           <Stack.Navigator
@@ -62,6 +64,7 @@ export default function App() {
 
           </Stack.Navigator>
         </NavigationContainer>
+      </HabitsContextProvider>
   );
 }
 

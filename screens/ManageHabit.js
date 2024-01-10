@@ -17,9 +17,13 @@ function ManageHabit({route, navigation}){
         });
     }, [navigation, isEditing]);
 
-    function deleteHabitHandler() {}
+    function deleteHabitHandler() {
+        navigation.goBack();
+    }
 
-    function cancelHandler() {}
+    function cancelHandler() {
+        navigation.goBack();
+    }
 
     function confirmHandler() {}
 
