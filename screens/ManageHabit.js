@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { useLayoutEffect } from 'react';
+import { useContext,useLayoutEffect } from 'react';
 import IconButton from "../components/IconButton";
 import { GlobalStyles } from "../constants/style";
 import Button from "../components/Button";
+import { HabitsContext } from '../store/habits-context';
 
 
 
 function ManageHabit({route, navigation}){
+    const habitsCtx = useContext(HabitsContext);
+
     const editedHabitId = route.params?.habitId;
     const isEditing = !!editedHabitId;
 
@@ -18,6 +21,7 @@ function ManageHabit({route, navigation}){
     }, [navigation, isEditing]);
 
     function deleteHabitHandler() {
+        habitsCtx.deleteHabit(editedHabitId);
         navigation.goBack();
     }
 
@@ -25,7 +29,25 @@ function ManageHabit({route, navigation}){
         navigation.goBack();
     }
 
-    function confirmHandler() {}
+    function confirmHandler() {
+        if (isEditing) {
+            habitsCtx.updateHabit(
+                editedHabitId,
+                {
+                    description: 'Test!!!!',
+                    amount: 29.99,
+                    date: new Date('2022-05-20'),
+                }
+            );
+        } else {
+            habitsCtx.addHabit({
+                description: 'Test',
+                amount: 19.99,
+                date: new Date('2022-05-19'),
+            });
+        }
+        navigation.goBack();
+    }
 
     return (
         <View style={styles.container}>

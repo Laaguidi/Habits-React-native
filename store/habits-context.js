@@ -67,7 +67,7 @@ export const HabitsContext = createContext({
 });
 
 
-function expensesReducer(state, action) {
+function habitsReducer(state, action) {
     switch (action.type) {
         case 'ADD':
             const id = new Date().toString() + Math.random().toString();
@@ -100,7 +100,7 @@ function HabitsContextProvider({ children }) {
         dispatch({ type: 'DELETE', payload: id });
     }
 
-    function updateExpense(id, habitData) {
+    function updateHabit(id, habitData) {
         dispatch({ type: 'UPDATE', payload: { id: id, data: habitData } });
     }
 
@@ -111,7 +111,9 @@ function HabitsContextProvider({ children }) {
         updateHabit: updateHabit,
     };
 
-    return <HabitsContext.Provider>{children}</HabitsContext.Provider>;
+    return <HabitsContext.Provider value={value}>
+              {children}
+           </HabitsContext.Provider>;
 
 }
 

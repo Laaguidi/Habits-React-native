@@ -3,11 +3,17 @@ import HabitsList from "./HabitsList";
 
 
 
-function HabitsOutput({ habits }) {
+function HabitsOutput({ habits, fallbackText }) {
+    let content = <Text style={styles.infoText}>{fallbackText}</Text>;
+
+    if (habits.length > 0) {
+        content = <HabitsList habits={habits} />;
+    }
+
     return (
         <View>
          <Text>List Of habits</Text>
-            <HabitsList habits={habits}/>
+            {content}
         </View>
     );
 }
@@ -21,6 +27,11 @@ const styles = StyleSheet.create({
         paddingBottom: 0,
         paddingTop: 24,
         backgroundColor: '#8c7ae6'
-    }
-
+    },
+    infoText: {
+        color: 'black',
+        fontSize: 16,
+        textAlign: 'center',
+        marginTop: 32,
+    },
 });
