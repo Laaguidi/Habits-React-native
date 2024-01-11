@@ -5,6 +5,7 @@ import IconButton from "../components/IconButton";
 import { GlobalStyles } from "../constants/style";
 import Button from "../components/Button";
 import { HabitsContext } from '../store/habits-context';
+import HabitForm from "../components/HabitForm";
 
 
 
@@ -51,6 +52,7 @@ function ManageHabit({route, navigation}){
 
     return (
         <View style={styles.container}>
+            <HabitForm />
             <View style={styles.buttons}>
                 <Button style={styles.button} mode="flat" onPress={cancelHandler}>
                     Cancel
