@@ -30,37 +30,45 @@ function ManageHabit({route, navigation}){
         navigation.goBack();
     }
 
-    function confirmHandler() {
+    function confirmHandler(habitData) {
         if (isEditing) {
             habitsCtx.updateHabit(
                 editedHabitId,
-                {
+                habitData
+              /*  {
                     description: 'Test!!!!',
                     amount: 29.99,
                     date: new Date('2022-05-20'),
-                }
+                }*/
             );
         } else {
-            habitsCtx.addHabit({
+            habitsCtx.addHabit(
+                habitData
+            /*    {
                 description: 'Test',
                 amount: 19.99,
                 date: new Date('2022-05-19'),
-            });
+            }*/
+            );
         }
         navigation.goBack();
     }
 
     return (
         <View style={styles.container}>
-            <HabitForm />
-            <View style={styles.buttons}>
+            <HabitForm
+                onCancel={cancelHandler}
+                onSubmit={confirmHandler}
+                submitButtonLabel={isEditing ? 'Update' : 'Add'}
+            />
+           {/* <View style={styles.buttons}>
                 <Button style={styles.button} mode="flat" onPress={cancelHandler}>
                     Cancel
                 </Button>
                 <Button style={styles.button} onPress={confirmHandler}>
                     {isEditing ? 'Update' : 'Add'}
                 </Button>
-            </View>
+            </View>*/}
             {isEditing && (
                 <View style={styles.deleteContainer}>
                     <IconButton
