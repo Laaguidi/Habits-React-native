@@ -1,11 +1,17 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 
 import Input from './Input';
 import Button from "./Button";
 
-function HabitForm({ onCancel, onSubmit, submitButtonLabel }) {
+function HabitForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
     const [habitsText, setHabitsText] = useState('');
+
+
+
+    function habitChangedHandler(enteredValue) {
+        setHabitsText(enteredValue);
+    }
 
     function habitChangedHandler(enteredValue) {
         console.log('Entered text:', enteredValue); // Check if text is logged in the console
@@ -16,7 +22,14 @@ function HabitForm({ onCancel, onSubmit, submitButtonLabel }) {
         const habitData = {
             description: habitsText
         }
-        onSubmit(habitData);
+        //To do: check if no text also
+        const descriptionIsValid = habitData.description.trim().length <= 0;
+        if (!descriptionIsValid ){
+            Alert.alert('Invalid input', 'Please check your input values');
+            return;
+        }
+
+            onSubmit(habitData);
     }
 
     return (
@@ -28,9 +41,9 @@ function HabitForm({ onCancel, onSubmit, submitButtonLabel }) {
                     multiline: true,
                     // autoCapitalize: 'none'
                     // autoCorrect: false // default is true
-                    onChangeText: habitChangedHandler
-                }}
+                    onChangeText: habitChangedHandler,
 
+                }}
             />
 
             <View style={styles.buttons}>

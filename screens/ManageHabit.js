@@ -15,6 +15,10 @@ function ManageHabit({route, navigation}){
     const editedHabitId = route.params?.habitId;
     const isEditing = !!editedHabitId;
 
+    const selectedHabit = habitsCtx.habits.find(
+        (habit) => habit.id === editedHabitId
+    );
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: isEditing ? 'Edit Expense' : 'Add Expense',
@@ -59,6 +63,7 @@ function ManageHabit({route, navigation}){
             <HabitForm
                 onCancel={cancelHandler}
                 onSubmit={confirmHandler}
+                defaultValues={selectedHabit}
                 submitButtonLabel={isEditing ? 'Update' : 'Add'}
             />
            {/* <View style={styles.buttons}>

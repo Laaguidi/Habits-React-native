@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-//import { GlobalStyles } from '../constants/style';
+import { GlobalStyles } from '../constants/style';
 
 function Input({ label, textInputConfig }) {
     const inputStyles = [styles.input];
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 12,
-        color: 'mintLeaf',
+        color: GlobalStyles.colors.mintLeaf,
         marginBottom: 4,
     },
     input: {
