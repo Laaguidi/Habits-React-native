@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { useContext,useLayoutEffect } from 'react';
+import { useContext,useLayoutEffect, useState } from 'react';
 import IconButton from "../components/IconButton";
 import { GlobalStyles } from "../constants/style";
 import Button from "../components/Button";
 import { HabitsContext } from '../store/habits-context';
 import HabitForm from "../components/HabitForm";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 function ManageHabit({route, navigation}){
+
     const habitsCtx = useContext(HabitsContext);
 
     const editedHabitId = route.params?.habitId;
@@ -25,6 +27,7 @@ function ManageHabit({route, navigation}){
         });
     }, [navigation, isEditing]);
 
+/*
     function deleteHabitHandler() {
         habitsCtx.deleteHabit(editedHabitId);
         navigation.goBack();
@@ -39,22 +42,67 @@ function ManageHabit({route, navigation}){
             habitsCtx.updateHabit(
                 editedHabitId,
                 habitData
-              /*  {
-                    description: 'Test!!!!',
-                    amount: 29.99,
-                    date: new Date('2022-05-20'),
-                }*/
+
             );
         } else {
             habitsCtx.addHabit(
                 habitData
-            /*    {
-                description: 'Test',
-                amount: 19.99,
-                date: new Date('2022-05-19'),
-            }*/
+
             );
         }
+        navigation.goBack();
+    }*/
+
+    async function getAllHabitsFromStorage() {
+        try {
+            const jsonHabits = await AsyncStorage.getItem('habits');
+            return jsonHabits != null ? JSON.parse(jsonHabits) : [];
+        } catch (error) {
+            console.error('Error getting habits:', error);
+            return [];
+        }
+    }
+
+
+    //AsyncStorage:
+    async function saveHabitsToStorage(habits) {
+        try {
+            const jsonHabits = JSON.stringify(habits);
+            await AsyncStorage.setItem('habits', jsonHabits);
+        } catch (error) {
+            console.error('Error saving habits:', error);
+        }
+    }
+
+    async function confirmHandler(habitData) {
+        if (isEditing) {
+            habitsCtx.updateHabit(
+                editedHabitId,
+                habitData
+                //{
+                //   description: 'Test!!!!',
+                // }
+            );
+        } else {
+            habitsCtx.addHabit( habitData
+                //{
+                // description: 'Test',
+                //}
+            );
+        }
+        const updatedHabits = habitsCtx.getAllHabits(); // Assuming a function to get all habits
+        await saveHabitsToStorage(updatedHabits);
+        navigation.goBack();
+    }
+
+    async function deleteHabitHandler() {
+        habitsCtx.deleteHabit(editedHabitId);
+        const updatedHabits = habitsCtx.getAllHabits();
+        await saveHabitsToStorage(updatedHabits);
+        navigation.goBack();
+    }
+
+    function cancelHandler() {
         navigation.goBack();
     }
 

@@ -5,7 +5,7 @@ import HabitsOutput from "../components/HabitsOutput";
 import { HabitsContext } from '../store/habits-context';
 
 
-function AllHabits() {
+function AllHabits({ navigation, habits }) {
     const habitsCtx = useContext(HabitsContext);
 
     return (

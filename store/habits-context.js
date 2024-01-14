@@ -1,4 +1,6 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useState  } from 'react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const dummy_habits = [
     {
@@ -60,7 +62,8 @@ const dummy_habits = [
 
 export const HabitsContext = createContext({
     Habits: [],
-    //getAllHabits: () => [],
+    //last add
+    getAllHabits: () => [],
     addHabit: ({ description }) => {},
     deleteHabit: (id) => {},
     updateHabit: (id, { description, amount, date }) => {},
@@ -72,6 +75,13 @@ function habitsReducer(state, action) {
         case 'ADD':
             const id = new Date().toString() + Math.random().toString();
             return [{ ...action.payload, id: id }, ...state];
+
+        //last add:
+        case 'completed':
+            return state.map(habit =>
+                habit.id === action.payload ? { ...habit, completed: true } : habit
+            );
+
         case 'UPDATE':
             const updatableHabitIndex = state.findIndex(
                 (habit) => habit.id === action.payload.id
@@ -91,6 +101,32 @@ function habitsReducer(state, action) {
 
 function HabitsContextProvider({ children }) {
     const [habitsState, dispatch] = useReducer(habitsReducer, dummy_habits);
+    //add:
+    const [completedHabits, setCompletedHabits] = useState([]);
+    function habitsCompleted(habitId) {
+        dispatch({ type: 'completed', payload: habitId });
+        setCompletedHabits(prevCompletedHabits => [...prevCompletedHabits, habitId]);
+        // You might also update your storage or context here
+    }
+
+    //last add:
+    async function getAllHabits() {
+        try {
+            const jsonHabits = await AsyncStorage.getItem('habits');
+            return jsonHabits != null ? JSON.parse(jsonHabits) : [];
+        } catch (error) {
+            console.error('Error getting habits:', error);
+            return [];
+        }
+    }
+    async function saveHabitsToStorage(habits) {
+        try {
+            const jsonHabits = JSON.stringify(habits);
+            await AsyncStorage.setItem('habits', jsonHabits);
+        } catch (error) {
+            console.error('Error saving habits:', error);
+        }
+    }
 
     function addHabit(habitData) {
         dispatch({ type: 'ADD', payload: habitData });
@@ -98,7 +134,17 @@ function HabitsContextProvider({ children }) {
 
     function deleteHabit(id) {
         dispatch({ type: 'DELETE', payload: id });
+        // Get the current habits from AsyncStorage
+        getAllHabits().then((habits) => {
+            // Filter out the deleted habit
+            const updatedHabits = habits.filter((habit) => habit.id !== id);
+
+            // Save the updated habits back to AsyncStorage
+            saveHabitsToStorage(updatedHabits);
+        });
     }
+
+
 
     function updateHabit(id, habitData) {
         dispatch({ type: 'UPDATE', payload: { id: id, data: habitData } });
@@ -106,6 +152,9 @@ function HabitsContextProvider({ children }) {
 
     const value = {
         habits: habitsState,
+        //last add:
+        completedHabits: completedHabits,
+        getAllHabits: getAllHabits,
         addHabit: addHabit,
         deleteHabit: deleteHabit,
         updateHabit: updateHabit,

@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 //import {useEffect, useContext} from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+//import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PresentationScreen from "./screens/PresentationScreen";
 import AllHabits from "./screens/AllHabits";
 import IconButton from "./components/IconButton";
 import { GlobalStyles } from './constants/style';
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 import ManageHabit from "./screens/ManageHabit";
@@ -16,6 +18,8 @@ import HabitsContextProvider from "./store/habits-context";
 const Stack = createStackNavigator();
 
 export default function App() {
+    //last Add:
+
 
   return (
       <HabitsContextProvider>
